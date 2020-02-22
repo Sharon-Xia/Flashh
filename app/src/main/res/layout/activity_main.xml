@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/background_flash"
+    tools:context=".MainActivity"
+    >
+
+
+    <TextView
+        android:id="@+id/flashcard_question"
+        android:layout_width="390dp"
+        android:layout_height="200dp"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentEnd="false"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="false"
+        android:layout_marginStart="-4dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="3dp"
+        android:background="@drawable/card_questionbackground"
+        android:text="How many bones are there in the human body?"
+        android:textAlignment="center"
+        android:textSize="40sp" />
+
+
+    <TextView
+        android:id="@+id/flashcard_answer"
+        android:layout_width="390dp"
+        android:layout_height="200dp"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentEnd="false"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="false"
+        android:layout_marginStart="-4dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="3dp"
+        android:background="@drawable/card_background"
+        android:text="206"
+        android:textAlignment="center"
+        android:textSize="40sp" />
+
+
+    <TextView
+        android:id="@+id/flashcard_answer_wrong1"
+        android:layout_width="390dp"
+        android:layout_height="60dp"
+        android:layout_alignTop="@id/flashcard_question"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentEnd="false"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="-4dp"
+        android:layout_marginTop="240dp"
+        android:background="@color/colorAnswerChoice"
+        android:text="101"
+        android:textAlignment="center"
+        android:textSize="40sp" />
+
+
+    <TextView
+        android:id="@+id/flashcard_answer_wrong2"
+        android:layout_width="390dp"
+        android:layout_height="60dp"
+        android:layout_alignTop="@id/flashcard_answer_wrong1"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentEnd="false"
+        android:layout_centerInParent="false"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="-1dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="-1dp"
+        android:background="@color/colorAnswerChoice"
+        android:text="143"
+        android:textAlignment="center"
+        android:textSize="40sp" />
+
+    <TextView
+        android:id="@+id/flashcard_answer_correct"
+        android:layout_width="390dp"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentEnd="false"
+        android:layout_centerInParent="true"
+        android:layout_alignTop="@id/flashcard_answer_wrong2"
+        android:layout_marginStart="-2dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="0dp"
+        android:background="@color/colorAnswerChoice"
+        android:text="206"
+        android:textAlignment="center"
+        android:textSize="40sp" />
+
+
+    <ImageView
+        android:id="@+id/toggle_choices_visibility"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="13dp"
+        android:src="@mipmap/woot_woot_foreground" />
+
+</RelativeLayout>
