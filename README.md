@@ -8,7 +8,6 @@
 `TODO://` Tests user on a single question, but gives multiple ways to answer.
 
 ### App Walk-though
-`TODO://` Add the URL to your animated app walk-though `gif` in the image tag below. Make sure the gif actually renders and animates when viewing this README. (☝️ Remove this paragraph after after adding gif)
 
 <img src="http://g.recordit.co/Txnetutq5T.gif" width=200><br>
 
