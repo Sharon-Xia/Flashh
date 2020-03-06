@@ -30,10 +30,40 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="200dp"
+        android:layout_alignTop="@id/insert_question"
+        android:layout_marginTop="130dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:hint="Enter the answer here"
+        android:inputType="textMultiLine"
+        />
+
+    <EditText
+        android:id="@+id/insert_wrongAnswer1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerHorizontal="true"
+        android:layout_alignTop="@id/insert_answerToQuestion"
+        android:layout_marginTop="130dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:hint="Enter Wrong Answer Option Here"
+        android:inputType="textMultiLine"
+        />
+
+
+    <EditText
+        android:id="@+id/insert_wrongAnswer2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerHorizontal="true"
+        android:layout_alignTop="@id/insert_wrongAnswer1"
+        android:layout_marginTop="130dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:hint="Enter Another Wrong Answer Option Here"
         android:inputType="textMultiLine"
         />
 

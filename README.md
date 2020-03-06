@@ -3,11 +3,11 @@
 ## Lab 2
 
 ### App Description
-Gives user the option to add their own question and answer. Provides feedback if question and answer fields aren't fully answered.
+Gives user the option to add their own question and answer. Provides feedback if question and answer fields aren't fully answered, and when flashcard is successfully created. User can edit their flashcard if they made a mistake. Additional inputs for multiple-choice style flashcard; automatically switches between flip-style and multiple-choice style depending on the number of inputs given. 
 
 ### App Walk-though
 
-<img src="http://g.recordit.co/WvDKWA96ri.gif" width=200><br>
+<img src="http://g.recordit.co/QfOqWBsKkJ.gif" width=200><br>
 
 
 ## Required
@@ -18,11 +18,11 @@ Gives user the option to add their own question and answer. Provides feedback if
 - [x] Push your progress to GitHub!
 
 ## Optional
-- [ ] User can edit a card
+- [x] User can edit a card
 - [x] An error message is shown if the user doesn't enter both a Question and an Answer
-- [ ] A notification is shown if the card was created successfully
-- [ ] User can also enter multiple choice answers when creating a card
-- [ ] App is further styled and customized!
+- [x] A notification is shown if the card was created successfully
+- [x] User can also enter multiple choice answers when creating a card
+- [x] App is further styled and customized!
 
 
 
