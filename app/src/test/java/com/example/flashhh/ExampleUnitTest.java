@@ -1,4 +1,4 @@
-package com.example.flashh;
+package com.example.flashhh;
 
 import org.junit.Test;
 

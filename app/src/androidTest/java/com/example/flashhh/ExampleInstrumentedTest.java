@@ -1,4 +1,4 @@
-package com.example.flashh;
+package com.example.flashhh;
 
 import android.content.Context;
 
@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.example.flashh", appContext.getPackageName());
+        assertEquals("com.example.flashhh", appContext.getPackageName());
     }
 }
