@@ -48,7 +48,7 @@
         android:layout_marginTop="130dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:hint="Enter Wrong Answer Option Here"
+        android:hint="Enter wrong answer option here"
         android:inputType="textMultiLine"
         />
 
@@ -63,7 +63,7 @@
         android:layout_marginTop="130dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:hint="Enter Another Wrong Answer Option Here"
+        android:hint="Enter another wrong answer option here"
         android:inputType="textMultiLine"
         />
 

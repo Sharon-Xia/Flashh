@@ -116,4 +116,13 @@
         android:src="@mipmap/edit_icon_foreground"
         />
 
+    <ImageView
+        android:id="@+id/next_button"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:src="@mipmap/next_card_foreground"
+        />
+
 </RelativeLayout>
