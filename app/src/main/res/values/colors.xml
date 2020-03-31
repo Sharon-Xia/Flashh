@@ -3,7 +3,10 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="colorAnswerChoice">#b0c6eb</color>
-    <color name="colorAnswerRight">#7ae873</color>
+    <color name="colorAnswerChoice">#92FFFC</color>
+    <color name="colorAnswerRight">#6aebb7</color>
     <color name="colorAnswerWrong">#e58f91</color>
+    <color name="colorMainBackground">#D1F6F5</color>
+    <color name="colorActivityBackground1">#A8F2EF</color>
+    <color name="colorActivityBackground2">#92FFFC</color>
 </resources>

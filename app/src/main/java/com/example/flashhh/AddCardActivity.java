@@ -1,13 +1,12 @@
 package com.example.flashhh;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class AddCardActivity extends AppCompatActivity {
 
@@ -15,6 +14,7 @@ public class AddCardActivity extends AppCompatActivity {
     String answer;
     String w1;
     String w2;
+    boolean edit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +28,7 @@ public class AddCardActivity extends AppCompatActivity {
             answer = getIntent().getStringExtra("answer");
             w1 = getIntent().getStringExtra("wrongAnswer1");
             w2 = getIntent().getStringExtra("wrongAnswer2");
+
 
             EditText insertQuestion = findViewById(R.id.insert_question);
             insertQuestion.setText(question);
@@ -81,6 +82,7 @@ public class AddCardActivity extends AppCompatActivity {
                     data.putExtra("answer", answer);
                     data.putExtra("wrongAnswer1", w1);
                     data.putExtra("wrongAnswer2", w2);
+                    data.putExtra("edit", edit);
                     setResult(RESULT_OK, data);
                     finish();
                 }

@@ -2,12 +2,15 @@ package com.example.flashhh;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
+import java.util.Random;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,29 +25,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         flashcardDatabase = new FlashcardDatabase(getApplicationContext());
+        allFlashcards = flashcardDatabase.getAllCards();
         isShowingAnswers = false;
 
+
+        //makeMultipleChoiceInvisible();
         findViewById(R.id.flashcard_answer).setVisibility(View.INVISIBLE);
-        findViewById(R.id.toggle_choices_visibility).setVisibility(View.INVISIBLE);
-        makeMultipleChoiceInvisible();
 
-
-        if (allFlashcards != null && allFlashcards.size() > 0)
-        {
-            ((TextView) findViewById(R.id.flashcard_question)).setText(allFlashcards.get(0).getQuestion());
-            ((TextView) findViewById(R.id.flashcard_answer)).setText(allFlashcards.get(0).getAnswer());
-
-            ((TextView)findViewById(R.id.flashcard_answer_correct)).setText(allFlashcards.get(0).getAnswer());
-            ((TextView)findViewById(R.id.flashcard_answer_wrong1)).setText(allFlashcards.get(0).getWrongAnswer1());
-            ((TextView)findViewById(R.id.flashcard_answer_wrong2)).setText(allFlashcards.get(0).getWrongAnswer2());
-        }
+        updateCard(true);
 
 
         findViewById(R.id.flashcard_question).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!isShowingAnswers)
+                Log.i("hi", "" + allFlashcards.size());
+                if (allFlashcards.size() != 0 && !isShowingAnswers)
                 { // mc needs to be off in order to use flashcard flip-mode
                     findViewById(R.id.flashcard_answer).setVisibility(View.VISIBLE);
                     findViewById(R.id.flashcard_question).setVisibility(View.INVISIBLE);
@@ -64,22 +61,22 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.flashcard_answer_correct).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                findViewById(R.id.flashcard_answer_correct).setBackgroundColor(
-                        getResources().getColor(R.color.colorAnswerRight));
+                findViewById(R.id.flashcard_answer_correct).setBackground(
+                        getResources().getDrawable(R.drawable.multiple_choice_correct));
             }
         });
 
         findViewById(R.id.flashcard_answer_wrong1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                findViewById(R.id.flashcard_answer_correct).setBackgroundColor(
-                        getResources().getColor(R.color.colorAnswerRight));
+                findViewById(R.id.flashcard_answer_correct).setBackground(
+                        getResources().getDrawable(R.drawable.multiple_choice_correct));
 
-                findViewById(R.id.flashcard_answer_wrong1).setBackgroundColor(
-                        getResources().getColor(R.color.colorAnswerWrong));
+                findViewById(R.id.flashcard_answer_wrong1).setBackground(
+                        getResources().getDrawable(R.drawable.multiple_choice_wrong));
 
-                findViewById(R.id.flashcard_answer_wrong2).setBackgroundColor(
-                        getResources().getColor(R.color.colorAnswerChoice));
+                findViewById(R.id.flashcard_answer_wrong2).setBackground(
+                        getResources().getDrawable(R.drawable.multiple_choice_background));
 
             }
         });
@@ -87,14 +84,14 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.flashcard_answer_wrong2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                findViewById(R.id.flashcard_answer_correct).setBackgroundColor(
-                        getResources().getColor(R.color.colorAnswerRight));
+                findViewById(R.id.flashcard_answer_correct).setBackground(
+                        getResources().getDrawable(R.drawable.multiple_choice_correct));
 
-                findViewById(R.id.flashcard_answer_wrong1).setBackgroundColor(
-                        getResources().getColor(R.color.colorAnswerChoice));
+                findViewById(R.id.flashcard_answer_wrong1).setBackground(
+                        getResources().getDrawable(R.drawable.multiple_choice_background));
 
-                findViewById(R.id.flashcard_answer_wrong2).setBackgroundColor(
-                        getResources().getColor(R.color.colorAnswerWrong));
+                findViewById(R.id.flashcard_answer_wrong2).setBackground(
+                        getResources().getDrawable(R.drawable.multiple_choice_wrong));
             }
         });
 
@@ -107,24 +104,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        findViewById(R.id.toggle_choices_visibility).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isShowingAnswers) {
-                    makeMultipleChoiceInvisible();
-                } else {
-                    makeMultipleChoiceVisible();
-                }
-                isShowingAnswers = !isShowingAnswers;
-            }
-        });
-
 
         // *** CREATING NEW ACTIVITY ***
         findViewById(R.id.add_card_icon).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AddCardActivity.class);
+                intent.putExtra("edit", false);
                 MainActivity.this.startActivityForResult(intent, 100);
             }
         });
@@ -133,21 +119,31 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.edit_card_icon).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AddCardActivity.class);
+                if (allFlashcards.size() != 0)
+                {
+                    Intent intent = new Intent(MainActivity.this, AddCardActivity.class);
 
-                TextView q = findViewById(R.id.flashcard_question);
-                intent.putExtra("question", q.getText());
+                    intent.putExtra("edit", true);
 
-                TextView a = findViewById(R.id.flashcard_answer);
-                intent.putExtra("answer", a.getText());
+                    TextView q = findViewById(R.id.flashcard_question);
+                    intent.putExtra("question", q.getText());
 
-                TextView w1 = findViewById(R.id.flashcard_answer_wrong1);
-                intent.putExtra("wrongAnswer1", w1.getText());
+                    TextView a = findViewById(R.id.flashcard_answer);
+                    intent.putExtra("answer", a.getText());
 
-                TextView w2 = findViewById(R.id.flashcard_answer_wrong2);
-                intent.putExtra("wrongAnswer2", w2.getText());
+                    TextView w1 = findViewById(R.id.flashcard_answer_wrong1);
+                    intent.putExtra("wrongAnswer1", w1.getText());
 
-                MainActivity.this.startActivityForResult(intent, 100);
+                    TextView w2 = findViewById(R.id.flashcard_answer_wrong2);
+                    intent.putExtra("wrongAnswer2", w2.getText());
+
+                    flashcardDatabase.deleteCard((String) q.getText());
+
+                    MainActivity.this.startActivityForResult(intent, 100);
+                }
+                else {
+                    Log.i("error", "cannot edit a card that doesn't exist");
+                }
             }
         });
 
@@ -155,23 +151,13 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.next_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // advance our pointer index so we can show the next card
-                currentCardDisplayedIndex++;
 
-                // make sure we don't get an IndexOutOfBoundsError if we are viewing the last indexed card in our list
-                if (currentCardDisplayedIndex > allFlashcards.size() - 1) {
-                    currentCardDisplayedIndex = 0;
-                }
+                // changes the current index & displays card
+                updateCard(true);
 
-                // set the question and answer TextViews with data from the database
-                ((TextView) findViewById(R.id.flashcard_question)).setText(allFlashcards.get(currentCardDisplayedIndex).getQuestion());
-                ((TextView) findViewById(R.id.flashcard_answer)).setText(allFlashcards.get(currentCardDisplayedIndex).getAnswer());
-                ((TextView)findViewById(R.id.flashcard_answer_correct)).setText(allFlashcards.get(currentCardDisplayedIndex).getAnswer());
-                ((TextView)findViewById(R.id.flashcard_answer_wrong1)).setText(allFlashcards.get(currentCardDisplayedIndex).getWrongAnswer1());
-                ((TextView)findViewById(R.id.flashcard_answer_wrong2)).setText(allFlashcards.get(currentCardDisplayedIndex).getWrongAnswer2());
-
-
-                if (!allFlashcards.get(currentCardDisplayedIndex).getWrongAnswer1().equals("") && !allFlashcards.get(currentCardDisplayedIndex).getWrongAnswer2().equals("")) // MC options
+                if (allFlashcards.size() != 0 &&
+                        !allFlashcards.get(currentCardDisplayedIndex).getWrongAnswer1().equals("") &&
+                        !allFlashcards.get(currentCardDisplayedIndex).getWrongAnswer2().equals("")) // MC options
                 {
                     makeMultipleChoiceVisible();
                     resetMultipleChoiceColor();
@@ -188,6 +174,19 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+        findViewById(R.id.trash_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (allFlashcards.size() != 0)
+                {
+                    flashcardDatabase.deleteCard(((TextView) findViewById(R.id.flashcard_question)).getText().toString());
+                    allFlashcards = flashcardDatabase.getAllCards();
+                    updateCard(true);
+                }
+            }
+        });
     }
 
     @Override
@@ -198,35 +197,30 @@ public class MainActivity extends AppCompatActivity {
             String wrongAnswer1 = data.getExtras().getString("wrongAnswer1");
             String wrongAnswer2 = data.getExtras().getString("wrongAnswer2");
 
-            flashcardDatabase.insertCard(new Flashcard(question, answer, wrongAnswer1, wrongAnswer2));
-            allFlashcards = flashcardDatabase.getAllCards();
+            if (!data.getExtras().getBoolean("edit")) { // create new card
+                flashcardDatabase.insertCard(new Flashcard(question, answer, wrongAnswer1, wrongAnswer2));
+                allFlashcards = flashcardDatabase.getAllCards();
+                currentCardDisplayedIndex = allFlashcards.size() - 1; // depends on prev line
+                Log.i("Index after addCard", "" + currentCardDisplayedIndex);
+                Log.i("Size after addCard", "" + allFlashcards.size());
 
-            ((TextView)findViewById(R.id.flashcard_question)).setText(question);
-            ((TextView)findViewById(R.id.flashcard_answer)).setText(answer);
-            ((TextView)findViewById(R.id.flashcard_answer_correct)).setText(answer);
-            ((TextView)findViewById(R.id.flashcard_answer_wrong1)).setText(wrongAnswer1);
-            ((TextView)findViewById(R.id.flashcard_answer_wrong2)).setText(wrongAnswer2);
+                updateCard(false);
 
-
-            if (!wrongAnswer1.equals("") && !wrongAnswer2.equals("")) // MC options
-            {
-                makeMultipleChoiceVisible();
-                resetMultipleChoiceColor();
-                isShowingAnswers = true;
+                Snackbar.make(findViewById(R.id.flashcard_question),
+                        "Flashcard successfully created", Snackbar.LENGTH_SHORT).show();
             }
-            else  // Flash Card Flip Option
-            {
-                if (isShowingAnswers) // ** MAKE MC OPTIONS INVISIBLE
-                {
-                    makeMultipleChoiceInvisible();
-                    resetMultipleChoiceColor();
-                    isShowingAnswers = !isShowingAnswers;
-                }
+            else { // edit card
+                flashcardDatabase.insertCard(new Flashcard(question, answer, wrongAnswer1, wrongAnswer2));
+                allFlashcards = flashcardDatabase.getAllCards();
+                currentCardDisplayedIndex = allFlashcards.size() - 1;
+                Log.i("Editing card", "updating");
+                // index stays the same
+
+                updateCard(false);
+
+                Snackbar.make(findViewById(R.id.flashcard_question),
+                        "Flashcard successfully edited", Snackbar.LENGTH_SHORT).show();
             }
-
-            Snackbar.make(findViewById(R.id.flashcard_question),
-                  "Flashcard successfully created", Snackbar.LENGTH_SHORT).show();
-
         }
     }
 
@@ -246,13 +240,115 @@ public class MainActivity extends AppCompatActivity {
 
     private void resetMultipleChoiceColor()
     {
-        findViewById(R.id.flashcard_answer_correct).setBackgroundColor(
-                getResources().getColor(R.color.colorAnswerChoice));
+        findViewById(R.id.flashcard_answer_correct).setBackground(
+                getResources().getDrawable(R.drawable.multiple_choice_background));
 
-        findViewById(R.id.flashcard_answer_wrong1).setBackgroundColor(
-                getResources().getColor(R.color.colorAnswerChoice));
+        findViewById(R.id.flashcard_answer_wrong1).setBackground(
+                getResources().getDrawable(R.drawable.multiple_choice_background));
 
-        findViewById(R.id.flashcard_answer_wrong2).setBackgroundColor(
-                getResources().getColor(R.color.colorAnswerChoice));
+        findViewById(R.id.flashcard_answer_wrong2).setBackground(
+                getResources().getDrawable(R.drawable.multiple_choice_background));
+    }
+
+
+    private void updateCard(boolean random)
+    {
+        Log.i("debug", "CardList size is " + allFlashcards.size());
+        if (allFlashcards.size() == 0)
+        {
+            ((TextView) findViewById(R.id.flashcard_question)).setText("Add a card :)");
+        }
+        else if(allFlashcards.size() > 1)
+        {
+            while(random && true)
+            {
+                int i = getRandomNumber(0, allFlashcards.size()-1);
+
+                if (i != currentCardDisplayedIndex)
+                {
+                    currentCardDisplayedIndex = i;
+                    break;
+                }
+            }
+            // set the question and answer TextViews with data from the database
+        }
+        // if size == 1, everything stays the same
+        else // if size == 1, everything stays the same
+        {
+            currentCardDisplayedIndex = 0;
+        }
+        updateCardMCVisuals();
+        updateOpacitiesOfIcons();
+    }
+
+
+    private void updateCardMCVisuals()
+    {
+        if (allFlashcards.size() > 0)
+        {
+            ((TextView) findViewById(R.id.flashcard_question)).setText(allFlashcards.get(currentCardDisplayedIndex).getQuestion());
+            ((TextView) findViewById(R.id.flashcard_answer)).setText(allFlashcards.get(currentCardDisplayedIndex).getAnswer());
+            ((TextView) findViewById(R.id.flashcard_answer_correct)).setText(allFlashcards.get(currentCardDisplayedIndex).getAnswer());
+            ((TextView) findViewById(R.id.flashcard_answer_wrong1)).setText(allFlashcards.get(currentCardDisplayedIndex).getWrongAnswer1());
+            ((TextView) findViewById(R.id.flashcard_answer_wrong2)).setText(allFlashcards.get(currentCardDisplayedIndex).getWrongAnswer2());
+
+
+            if (!allFlashcards.get(currentCardDisplayedIndex).getWrongAnswer1().equals("")
+                    && !allFlashcards.get(currentCardDisplayedIndex).getWrongAnswer2().equals("")) // MC options
+            {
+                makeMultipleChoiceVisible();
+                resetMultipleChoiceColor();
+                isShowingAnswers = true;
+            }
+            else  // Flash Card Flip Option
+            {
+                if (isShowingAnswers) // ** MAKE MC OPTIONS INVISIBLE
+                {
+                    makeMultipleChoiceInvisible();
+                    resetMultipleChoiceColor();
+                    isShowingAnswers = false;
+                }
+            }
+        }
+        else
+        {
+            makeMultipleChoiceInvisible();
+            resetMultipleChoiceColor();
+            isShowingAnswers = false;
+        }
+    }
+
+
+    private void updateOpacitiesOfIcons()
+    {
+        if (allFlashcards.size() <= 1)
+        {
+            ((ImageView)findViewById(R.id.next_button)).setAlpha(Integer.parseInt("100"));
+        }
+        else
+        {
+            ((ImageView)findViewById(R.id.next_button)).setAlpha(Integer.parseInt("255")); // set next button opacity to 100%
+        }
+
+        if (allFlashcards.size() == 0)
+        {
+            ((ImageView)findViewById(R.id.trash_button)).setAlpha(Integer.parseInt("100"));
+            ((ImageView)findViewById(R.id.edit_card_icon)).setAlpha(Integer.parseInt("100"));
+            Log.i("debug", "opacity works");
+        }
+        else
+        {
+            ((ImageView)findViewById(R.id.trash_button)).setAlpha(Integer.parseInt("255"));
+            ((ImageView)findViewById(R.id.edit_card_icon)).setAlpha(Integer.parseInt("255"));
+        }
+
+    }
+
+
+    // returns a random number between minNumber and maxNumber, inclusive.
+    // for example, if i called getRandomNumber(1, 3), there's an equal chance of it returning either 1, 2, or 3.
+    public int getRandomNumber(int minNumber, int maxNumber) {
+        Random rand = new Random();
+        return rand.nextInt((maxNumber - minNumber) + 1) + minNumber;
     }
 }

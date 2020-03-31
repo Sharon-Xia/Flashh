@@ -3,21 +3,27 @@
 ## Lab 3
 
 ### App Description
-The flashcard app now saves cards created, and allows you to switch between them.
+The flashcard app now saves cards created, and allows you to switch between them. 
+The next button switches the displayed card to a random card in the database, and grays out when there's less than 2 cards in the database. 
+The trash button deletes the current card from the database, and switches the displayed card to a random card. The trash button also grays out whenever there are no cards left to be deleted.
+If there are no cards currently in the database, the app prompts the user to add a card.
+All functions from the previous labs are still supported.
+
+Lastly, the layout was updated to be more aesthetic :).
 
 ### App Walk-though
 
-<img src="http://g.recordit.co/dnoBs2uCpn.gif" width=200><br>
+<img src="http://g.recordit.co/5Qay6cjOjs.gif" width=200><br>
 
 ## Required
 - [x] User can create a card and still see their created card when the app is relaunched.
 - [x] User can create muliple cards and browse through all created cards
 
 ## Optional
-- [ ] User can delete a card and no longer see it in their deck anymore
-- [ ] Flashcards are shown in random order instead of the order they were created in
-- [ ] User can edit a card and see the edit saved when they browse through their deck of cards
-- [ ] User can create flashcards with multiple answers and be able to browse through cards with multiple choice answers shown
+- [x] User can delete a card and no longer see it in their deck anymore
+- [x] Flashcards are shown in random order instead of the order they were created in
+- [x] User can edit a card and see the edit saved when they browse through their deck of cards
+- [x] User can create flashcards with multiple answers and be able to browse through cards with multiple choice answers shown
 
 
 ## Lab 2

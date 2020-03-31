@@ -6,71 +6,78 @@
     android:layout_height="match_parent"
     android:id="@+id/background_flash"
     tools:context=".MainActivity"
+    android:background="@color/colorMainBackground"
     >
 
 
     <TextView
         android:id="@+id/flashcard_question"
-        android:layout_width="390dp"
+        android:layout_width="350dp"
         android:layout_height="200dp"
         android:layout_centerHorizontal="true"
-        android:layout_margin="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/card_questionbackground"
-        android:text="How many bones are there in the human body?"
+        android:text="Add a Card :)"
         android:textAlignment="center"
         android:autoSizeTextType="uniform"
         android:autoSizeMinTextSize="10sp"
-        android:autoSizeMaxTextSize="40sp"
+        android:autoSizeMaxTextSize="20sp"
         />
 
 
     <TextView
         android:id="@+id/flashcard_answer"
-        android:layout_width="390dp"
+        android:layout_width="350dp"
         android:layout_height="200dp"
         android:layout_centerHorizontal="true"
-        android:layout_margin="10dp"
-        android:background="@drawable/card_background"
-        android:text="206"
-        android:textAlignment="center"
-        android:autoSizeTextType="uniform"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:autoSizeMaxTextSize="20sp"
         android:autoSizeMinTextSize="10sp"
-        android:autoSizeMaxTextSize="40sp"/>
+        android:autoSizeTextType="uniform"
+        android:background="@drawable/card_background"
+        android:text=""
+        android:textAlignment="center"
+        android:textSize="10sp" />
 
 
     <TextView
         android:id="@+id/flashcard_answer_wrong1"
-        android:layout_width="390dp"
+        android:layout_width="350dp"
         android:layout_height="60dp"
         android:layout_alignTop="@id/flashcard_question"
         android:layout_centerInParent="true"
         android:layout_marginStart="-4dp"
-        android:layout_marginTop="240dp"
-        android:background="@color/colorAnswerChoice"
-        android:text="101"
+        android:layout_marginTop="280dp"
+        android:background="@drawable/multiple_choice_background"
+        android:text=""
         android:textAlignment="center"
-        android:textSize="20sp"
-        />
+        android:textSize="20sp" />
 
 
     <TextView
         android:id="@+id/flashcard_answer_wrong2"
-        android:layout_width="390dp"
+        android:layout_width="350dp"
         android:layout_height="60dp"
         android:layout_alignTop="@id/flashcard_answer_wrong1"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="-1dp"
         android:layout_marginTop="80dp"
         android:layout_marginEnd="-1dp"
-        android:background="@color/colorAnswerChoice"
-        android:text="143"
+        android:background="@drawable/multiple_choice_background"
+        android:text=""
         android:textAlignment="center"
         android:textSize="20sp"
         />
 
     <TextView
         android:id="@+id/flashcard_answer_correct"
-        android:layout_width="390dp"
+        android:layout_width="350dp"
         android:layout_height="60dp"
         android:layout_alignParentStart="false"
         android:layout_alignParentTop="false"
@@ -80,49 +87,46 @@
         android:layout_marginStart="-2dp"
         android:layout_marginTop="80dp"
         android:layout_marginEnd="0dp"
-        android:background="@color/colorAnswerChoice"
-        android:text="206"
+        android:background="@drawable/multiple_choice_background"
+        android:text=""
         android:textAlignment="center"
         android:textSize="20sp"
         />
 
 
     <ImageView
-        android:id="@+id/toggle_choices_visibility"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="13dp"
-        android:src="@mipmap/woot_woot_foreground" />
-
-
-    <ImageView
         android:id="@+id/add_card_icon"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:src="@mipmap/plus_icon_foreground"
-        />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="220dp"
+        android:src="@mipmap/plus_icon_foreground" />
 
     <ImageView
         android:id="@+id/edit_card_icon"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:src="@mipmap/edit_icon_foreground"
-        />
+        android:layout_centerHorizontal="false"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="220dp"
+        android:src="@mipmap/edit_icon_foreground" />
 
     <ImageView
         android:id="@+id/next_button"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:src="@mipmap/next_card_foreground"
-        />
+        android:layout_marginTop="220dp"
+        android:layout_marginEnd="25dp"
+        android:src="@mipmap/next_card_foreground" />
+
+    <ImageView
+        android:id="@+id/trash_button"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:src="@mipmap/trash_foreground" />
 
 </RelativeLayout>
